@@ -1,0 +1,19 @@
+{
+  "name": "pinnacle",
+  "version": "1.0.0",
+  "description": "The Pinnacle – Luxury Living by STJ Group, Mohali",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/style.css --minify",
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/style.css --watch",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["real-estate", "luxury", "mohali", "pinnacle"],
+  "author": "STJ Group",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}

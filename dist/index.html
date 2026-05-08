@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pinnacle Mohali – Luxury Living by STJ Group</title>
+    <meta name="description" content="The Pinnacle – Luxury 3BHK, 4BHK & Penthouses in IT City Mohali. RERA: PBRERA-SAS81-PR1166. Starting ₹3 Crore. 36-floor iconic tower by STJ Group.">
+    <link href="./style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        html { scroll-behavior: smooth; }
+
+        /* ── STICKY HEADER ── */
+        #mainHeader { transition: background 0.3s ease, box-shadow 0.3s ease; }
+        #mainHeader.scrolled {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(0,50,83,0.97); backdrop-filter: blur(8px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+        }
+
+        /* ── COMMON ── */
+        .sec-pad { padding: 80px 24px; }
+        .sec-title {
+            font-family: 'Jost', sans-serif; font-size: clamp(26px,4.5vw,44px);
+            font-weight: 600; color: #003253; text-align: center; margin-bottom: 12px;
+        }
+        .sec-sub {
+            font-family: 'Jost', sans-serif; font-size: clamp(15px,2vw,19px);
+            font-weight: 400; color: #555; text-align: center;
+            max-width: 680px; margin: 0 auto 48px; line-height: 1.75;
+        }
+        .sec-line { width: 56px; height: 3px; background: #003253; margin: 14px auto 22px; }
+        .sec-line.gold { background: #c9963a; }
+        .sec-title.white { color: #fff; }
+        .sec-sub.white { color: #aac5da; }
+
+        /* ── RERA BAR ── */
+        .rera-bar { background: #003253; padding: 9px 24px; text-align: center; position: relative; z-index: 999; }
+        .rera-bar p { font-family: 'Jost', sans-serif; font-size: 13px; color: #aac5da; }
+        .rera-bar span { color: #fff; font-weight: 600; }
+
+        /* ── PRODUCTS ── */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 28px; max-width: 1180px; margin: 0 auto; }
+        .p-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.07); transition: transform .3s,box-shadow .3s; }
+        .p-card:hover { transform: translateY(-8px); box-shadow: 0 14px 40px rgba(0,50,83,0.14); }
+        .p-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        .p-img-placeholder { width: 100%; height: 220px; display: flex; align-items: center; justify-content: center; }
+        .p-body { padding: 24px; }
+        .p-badge { display: inline-block; background: #003253; color: #fff; font-family: 'Jost',sans-serif; font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        .p-title { font-family: 'Jost',sans-serif; font-size: 22px; font-weight: 600; color: #003253; margin-bottom: 6px; }
+        .p-price { font-family: 'Jost',sans-serif; font-size: 20px; font-weight: 700; color: #c9963a; margin-bottom: 16px; }
+        .p-list { list-style: none; padding: 0; margin: 0 0 20px; }
+        .p-list li { font-family: 'Jost',sans-serif; font-size: 14px; color: #555; padding: 7px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+        .p-list li i { color: #003253; font-size: 11px; }
+        .p-btn { width: 100%; background: #003253; color: #fff; font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 700; padding: 13px; border: 2px solid #003253; cursor: pointer; transition: all .3s; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; }
+        .p-btn:hover { background: transparent; color: #003253; }
+
+        /* ── PLANS ── */
+        .tab-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 44px; }
+        .tab-btn { font-family: 'Jost',sans-serif; font-size: 15px; font-weight: 600; padding: 11px 26px; border: 2px solid #003253; background: transparent; color: #003253; cursor: pointer; transition: all .3s; border-radius: 4px; }
+        .tab-btn.active, .tab-btn:hover { background: #003253; color: #fff; }
+        .plan-panel { display: none; max-width: 860px; margin: 0 auto; }
+        .plan-panel.active { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+        .plan-vis { flex: 1; min-width: 260px; background: linear-gradient(135deg,#eef3f8,#d9e8f2); border: 2px solid #003253; border-radius: 8px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+        .plan-vis i { font-size: 72px; color: #003253; opacity: 0.35; }
+        .plan-vis span { font-family: 'Jost',sans-serif; color: #003253; font-size: 16px; font-weight: 600; }
+        .plan-specs { flex: 1; min-width: 240px; }
+        .spec-row { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid #eee; }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-label { font-family: 'Jost',sans-serif; color: #777; font-size: 14px; }
+        .spec-val { font-family: 'Jost',sans-serif; color: #003253; font-size: 14px; font-weight: 700; }
+
+        /* ── LOCATION ── */
+        .loc-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+        @media(max-width:768px) { .loc-inner { grid-template-columns: 1fr; } }
+        .map-wrap { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
+        .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+        .loc-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; padding: 18px; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .loc-icon { width: 46px; height: 46px; min-width: 46px; background: #003253; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .loc-icon i { color: #fff; font-size: 17px; }
+        .loc-text h4 { font-family: 'Jost',sans-serif; font-size: 15px; font-weight: 700; color: #003253; margin-bottom: 4px; }
+        .loc-text p { font-family: 'Jost',sans-serif; font-size: 13px; color: #666; line-height: 1.6; }
+        .near-list { margin-top: 20px; }
+        .near-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .near-item i { color: #c9963a; font-size: 13px; width: 18px; flex-shrink: 0; }
+        .near-item span { font-family: 'Jost',sans-serif; font-size: 13px; color: #444; }
+
+        /* ── PRICE ── */
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(270px,1fr)); gap: 28px; max-width: 1080px; margin: 0 auto; }
+        .pr-card { border: 2px solid #e0e0e0; border-radius: 8px; padding: 34px 26px; text-align: center; transition: all .3s; position: relative; overflow: hidden; background: #fff; }
+        .pr-card.featured { border-color: #003253; background: #003253; }
+        .pr-card:hover { border-color: #003253; box-shadow: 0 10px 32px rgba(0,50,83,0.14); }
+        .feat-tag { position: absolute; top: 14px; right: -30px; background: #c9963a; color: #fff; font-family: 'Jost',sans-serif; font-size: 10px; font-weight: 700; padding: 4px 44px; transform: rotate(45deg); letter-spacing: 1px; }
+        .pr-type { font-family: 'Jost',sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #c9963a; margin-bottom: 10px; }
+        .pr-featured-type { color: #f0c060; }
+        .pr-val { font-family: 'Jost',sans-serif; font-size: 34px; font-weight: 700; color: #003253; margin-bottom: 4px; }
+        .pr-card.featured .pr-val { color: #fff; }
+        .pr-size { font-family: 'Jost',sans-serif; font-size: 13px; color: #999; margin-bottom: 26px; }
+        .pr-card.featured .pr-size { color: #aac5da; }
+        .pr-list { list-style: none; padding: 0; margin: 0 0 26px; text-align: left; }
+        .pr-list li { font-family: 'Jost',sans-serif; font-size: 13px; color: #555; padding: 7px 0; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid #f0f0f0; }
+        .pr-card.featured .pr-list li { color: #c8dce9; border-bottom-color: rgba(255,255,255,0.12); }
+        .pr-list li i { color: #003253; font-size: 11px; }
+        .pr-card.featured .pr-list li i { color: #c9963a; }
+        .pr-btn { width: 100%; background: #003253; color: #fff; font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 700; padding: 13px; border: 2px solid #003253; cursor: pointer; transition: all .3s; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; }
+        .pr-card.featured .pr-btn { background: #fff; color: #003253; border-color: #fff; }
+        .pr-btn:hover { background: transparent; color: #003253; }
+        .pr-card.featured .pr-btn:hover { background: transparent; color: #fff; }
+
+        /* ── AMENITIES ── */
+        .amen-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(150px,1fr)); gap: 20px; max-width: 1180px; margin: 0 auto; }
+        .amen-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 26px 14px; text-align: center; transition: all .3s; }
+        .amen-card:hover { background: rgba(255,255,255,0.16); transform: translateY(-4px); border-color: rgba(255,255,255,0.3); }
+        .amen-card i { font-size: 34px; color: #c9963a; margin-bottom: 12px; display: block; }
+        .amen-card p { font-family: 'Jost',sans-serif; font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.4; }
+
+        /* ── SPECIFICATION ── */
+        .stab-row { display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; border-bottom: 2px solid #003253; max-width: 860px; margin-inline: auto; margin-bottom: 44px; }
+        .stab-btn { font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 600; padding: 13px 22px; border: none; background: transparent; color: #003253; cursor: pointer; transition: all .3s; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+        .stab-btn.active { background: #003253; color: #fff; border-color: #003253; }
+        .stab-panel { display: none; max-width: 860px; margin: 0 auto; }
+        .stab-panel.active { display: block; }
+        .spec-table { width: 100%; border-collapse: collapse; }
+        .spec-table tr:nth-child(even) { background: #eef3f8; }
+        .spec-table td { font-family: 'Jost',sans-serif; font-size: 14px; padding: 13px 18px; color: #444; border-bottom: 1px solid #dde8f0; }
+        .spec-table td:first-child { font-weight: 700; color: #003253; width: 42%; }
+
+        /* ── GALLERY ── */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; max-width: 1180px; margin: 0 auto; }
+        @media(max-width:768px) { .gallery-grid { grid-template-columns: repeat(2,1fr); } }
+        @media(max-width:480px) { .gallery-grid { grid-template-columns: 1fr; } }
+        .g-item { position: relative; overflow: hidden; border-radius: 6px; cursor: pointer; aspect-ratio: 4/3; }
+        .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+        .g-item:hover img { transform: scale(1.07); }
+        .g-ov { position: absolute; inset: 0; background: rgba(0,50,83,0.5); opacity: 0; transition: opacity .3s; display: flex; align-items: center; justify-content: center; }
+        .g-ov i { color: #fff; font-size: 30px; }
+        .g-item:hover .g-ov { opacity: 1; }
+        .g-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+        .g-ph i { font-size: 40px; opacity: 0.4; color: #fff; }
+        .g-ph span { font-family: 'Jost',sans-serif; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ── LIGHTBOX ── */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
+        .lb-close { position: absolute; top: 18px; right: 22px; color: #fff; font-size: 34px; cursor: pointer; background: none; border: none; line-height: 1; }
+        .lb-close:hover { color: #c9963a; }
+
+        /* ── CONTACT ── */
+        .contact-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; }
+        @media(max-width:768px) { .contact-inner { grid-template-columns: 1fr; } }
+        .c-info { background: #003253; border-radius: 8px; padding: 40px; }
+        .c-info h3 { font-family: 'Jost',sans-serif; font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 28px; }
+        .c-info-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 22px; }
+        .c-info-item i { font-size: 19px; color: #c9963a; margin-top: 2px; flex-shrink: 0; }
+        .c-info-item h5 { font-family: 'Jost',sans-serif; font-size: 12px; font-weight: 700; color: #aac5da; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+        .c-info-item p { font-family: 'Jost',sans-serif; font-size: 14px; color: #fff; line-height: 1.6; }
+        .c-social { display: flex; gap: 10px; margin-top: 28px; }
+        .c-social a { width: 38px; height: 38px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #aac5da; text-decoration: none; font-size: 15px; transition: all .3s; }
+        .c-social a:hover { background: #c9963a; color: #fff; }
+        .c-form { background: #f8f9fa; border-radius: 8px; padding: 40px; }
+        .c-form h3 { font-family: 'Jost',sans-serif; font-size: 22px; font-weight: 700; color: #003253; margin-bottom: 26px; }
+        .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        @media(max-width:480px) { .form-2col { grid-template-columns: 1fr; } }
+        .fg { margin-bottom: 14px; }
+        .fg label { display: block; font-family: 'Jost',sans-serif; font-size: 12px; font-weight: 700; color: #003253; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .fg input, .fg select, .fg textarea { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 4px; font-family: 'Jost',sans-serif; font-size: 14px; color: #333; background: #fff; transition: border-color .3s; outline: none; }
+        .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: #003253; }
+        .fg textarea { height: 90px; resize: vertical; }
+        .f-submit { width: 100%; background: #003253; color: #fff; font-family: 'Jost',sans-serif; font-size: 15px; font-weight: 700; padding: 15px; border: 2px solid #003253; cursor: pointer; transition: all .3s; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; margin-top: 6px; }
+        .f-submit:hover { background: transparent; color: #003253; }
+        .success-msg { display: none; text-align: center; padding: 14px; background: #d4edda; border-radius: 4px; font-family: 'Jost',sans-serif; color: #155724; font-weight: 600; margin-top: 14px; }
+
+        /* ── FOOTER ── */
+        .footer { background: #011e35; color: #fff; padding: 60px 24px 20px; }
+        .footer-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; }
+        @media(max-width:900px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+        @media(max-width:520px) { .footer-inner { grid-template-columns: 1fr; } }
+        .f-brand img { max-width: 140px; margin-bottom: 14px; }
+        .f-brand p { font-family: 'Jost',sans-serif; font-size: 13px; color: #8ab0c8; line-height: 1.7; max-width: 260px; }
+        .f-col h4 { font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 700; color: #c9963a; margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1px; }
+        .f-col ul { list-style: none; padding: 0; margin: 0; }
+        .f-col ul li { margin-bottom: 10px; }
+        .f-col ul li a { font-family: 'Jost',sans-serif; font-size: 13px; color: #8ab0c8; text-decoration: none; transition: color .3s; }
+        .f-col ul li a:hover { color: #fff; }
+        .f-social { display: flex; gap: 10px; margin-top: 18px; }
+        .f-social a { width: 36px; height: 36px; background: rgba(255,255,255,0.07); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8ab0c8; text-decoration: none; font-size: 14px; transition: all .3s; }
+        .f-social a:hover { background: #c9963a; color: #fff; }
+        .f-bottom { max-width: 1180px; margin: 36px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.09); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .f-bottom p { font-family: 'Jost',sans-serif; font-size: 12px; color: #557a94; }
+
+        /* ── FLOATS ── */
+        .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 1000; background: #25D366; color: #fff; width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 18px rgba(37,211,102,0.45); text-decoration: none; transition: transform .3s; }
+        .wa-float:hover { transform: scale(1.12); }
+        .scroll-top-btn { position: fixed; bottom: 28px; left: 28px; z-index: 1000; background: #003253; color: #fff; width: 44px; height: 44px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 17px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,50,83,0.4); transition: all .3s; border: none; }
+        .scroll-top-btn.show { display: flex; }
+        .scroll-top-btn:hover { background: #c9963a; }
+    </style>
+</head>
+
+<body>
+
+    <!-- RERA BAR -->
+    <div class="rera-bar">
+        <p>RERA Approved &nbsp;|&nbsp; RERA No: <span>PBRERA-SAS81-PR1166</span> &nbsp;|&nbsp; The Pinnacle by STJ Group &nbsp;|&nbsp; IT City, Mohali</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════ -->
+    <section id="home" class="bg-[url('images/heroimg.png')] bg-cover bg-center w-[100%] h-screen" style="position:relative;">
+        <header id="mainHeader" class="py-5">
+            <div class="xl:max-w-[1240px] mx-auto px-6 flex justify-between items-center">
+                <figure class="cursor-pointer">
+                    <a href="#home">
+                        <img src="images/logo.png" alt="The Pinnacle logo" style="max-height:60px;width:auto;object-fit:contain;">
+                    </a>
+                </figure>
+                <nav id="navbox" class="hidden lg:block">
+                    <ul class="flex flex-col lg:flex-row gap-8 md:gap-12 p-1 lg:p-0 fixed lg:static top-0 pt-12 w-[70%] mx-auto bg-[#112A48] h-screen lg:h-auto lg:bg-transparent lg:w-auto lg:mx-0 lg:items-center lg:gap-6 xl:gap-10 lg:mr-12 transition-all duration-300 ease-in-out left-0 text-center">
+                        <li><a href="#about" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">About</a></li>
+                        <li><a href="#products" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Products</a></li>
+                        <li><a href="#plans" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Plans</a></li>
+                        <li><a href="#location" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Location</a></li>
+                        <li><a href="#price" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Price</a></li>
+                        <li><a href="#amenities" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Amenities</a></li>
+                        <li><a href="#specification" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Specification</a></li>
+                        <li><a href="#gallery" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Gallery</a></li>
+                        <li><a href="#contact" class="text-xl lg:text-lg font-jost text-white hover:text-[#c9963a] transition-colors duration-200">Contact us</a></li>
+                    </ul>
+                </nav>
+                <button id="navbtn" class="lg:hidden hover:scale-125 transition-all duration-300 ease-in-out p-1 z-[1001] relative">
+                    <i id="navicon" class="fa-solid fa-bars md:text-2xl text-white" style="font-size:24px;"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="max-w-[1064px] flex items-center justify-center flex-col h-[80vh] mx-auto text-center px-4">
+            <p class="max-w-[765px] font-jost-500 text-3xl md:text-[50px] mx-auto text-white text-center">
+                Live Above It All — The Pinnacle by STJ Group, Mohali
+            </p>
+            <p class="max-w-[840px] font-jost-400 text-xl md:text-[22px] mx-auto text-white text-center mt-8">
+                Standing tall at 36 floors, The Pinnacle offers panoramic views, futuristic engineering, and an elite
+                lifestyle in the heart of Mohali's booming urban landscape.
+            </p>
+            <a href="#contact">
+                <button class="flex justify-center items-center text-[#003253] bg-white hover:bg-[#003253] hover:text-white transition-all duration-300 ease-in-out gap-2 w-[250px] h-[50px] rounded-md mt-8">
+                    <div class="font-jost text-[17px] font-semibold">Download Brochure</div>
+                    <figure><i class="fa-solid fa-arrow-right"></i></figure>
+                </button>
+            </a>
+            <span class="text-xl text-white font-normal font-jost mt-8">Rera No - PBRERA-SAS81-PR1166</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         ABOUT SECTION
+    ═══════════════════════════════════════ -->
+    <section id="about">
+        <div class="flex justify-around items-center p-[40px_24px] md:p-[80px_80px] gap-16 xl:max-w-[1240px] mx-auto flex-col lg:flex-row">
+            <figure class="max-w-sm fade-in w-full">
+                <img src="./images/section2.png" alt="The Pinnacle Building" class="bg-cover bg-center w-full rounded-lg" style="box-shadow:0 8px 32px rgba(0,50,83,0.15);">
+            </figure>
+            <article class="max-w-2xl fade-in" style="transition-delay:150ms">
+                <h1 class="md:text-[40px] text-2xl font-jost font-medium text-[#003253]">
+                    The Pinnacle Mohali – An Iconic Landmark of Luxury Living
+                </h1>
+                <p class="text-[18px] font-jost font-normal text-[#2C2C2C] mt-2">
+                    Where Prestige, Architecture, and Lifestyle Come Together in IT City, Mohali
+                </p>
+                <p class="text-[16px] font-jost font-normal text-[#2C2C2C] mt-4" style="line-height:1.8;">
+                    The Pinnacle, developed by STJ Group under the Mohali City Centre (MCC) umbrella, is more than a
+                    luxury apartment — it's an architectural masterpiece rising in the heart of IT City, Mohali.
+                    Designed by India's legendary architect <strong>Hafeez Contractor</strong> and styled by celebrity
+                    interior designer <strong>Zafar Choudhary</strong>, The Pinnacle sets a new standard in urban living.
+                    <br><br>
+                    With expansive 3 BHK, 4 BHK apartments, and exclusive penthouses starting from ₹3 Crore, this G+35
+                    icon offers breathtaking views, modern engineering, and unmatched elegance.
+                </p>
+                <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;">
+                    <a href="#products">
+                        <button class="text-[15px] font-jost font-medium text-white uppercase bg-[#003253] hover:text-[#003253] hover:bg-white transition-all duration-300 ease-in-out px-6 py-3 border-2 border-[#003253]">
+                            View Units
+                        </button>
+                    </a>
+                    <a href="#contact">
+                        <button class="text-[15px] font-jost font-medium text-[#003253] uppercase bg-white hover:text-white hover:bg-[#003253] transition-all duration-300 ease-in-out px-6 py-3 border-2 border-[#003253]">
+                            Enquire Now
+                        </button>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         STATS SECTION
+    ═══════════════════════════════════════ -->
+    <section class="bg-[url('images/Rectangle.jpg')] bg-cover bg-center w-[100%] h-auto py-12">
+        <h2 class="text-[40px] font-jost font-medium text-white text-center">The Pinnacle in Numbers</h2>
+        <p class="text-xl font-jost font-medium text-white text-center pt-8 px-4">
+            A quick look at the scale, design, and exclusivity that defines luxury living at The Pinnacle Mohali.
+        </p>
+        <div class="max-w-[1240px] xl:px-0 xl:mx-auto grid sm:grid-cols-3 lg:grid-cols-5 justify-center">
+            <div class="flex flex-col items-center p-1.5 relative h-[180px] gap-4 mt-8 group fade-in" style="transition-delay:0ms">
+                <figure class="group-hover:scale-125 transition-all duration-300 ease-in-out">
+                    <img src="./images/icon/1.svg" alt="Acres">
+                </figure>
+                <h3 class="font-jost font-medium text-[50px] text-white" data-count="8">8</h3>
+                <p class="font-jost font-medium text-[24px] text-white">Acres Land Area</p>
+                <div class="bg-[#CFCFCF] w-[2px] h-[90%] absolute hidden md:block right-0"></div>
+            </div>
+            <div class="flex flex-col items-center p-1.5 relative h-[180px] gap-4 mt-8 group fade-in" style="transition-delay:100ms">
+                <figure class="group-hover:scale-125 transition-all duration-300 ease-in-out">
+                    <img src="./images/icon/2.svg" alt="Residences">
+                </figure>
+                <h3 class="font-jost font-medium text-[50px] text-white" data-count="700">700</h3>
+                <p class="font-jost font-medium text-[24px] text-white">Residences</p>
+                <div class="bg-[#CFCFCF] w-[2px] h-[90%] absolute hidden md:block right-0"></div>
+            </div>
+            <div class="flex flex-col items-center p-1.5 relative h-[180px] gap-4 mt-8 group fade-in" style="transition-delay:200ms">
+                <figure class="group-hover:scale-125 transition-all duration-300 ease-in-out">
+                    <img src="./images/icon/3.svg" alt="Towers">
+                </figure>
+                <h3 class="font-jost font-medium text-[50px] text-white" data-count="6">6</h3>
+                <p class="font-jost font-medium text-[24px] text-white">6 Towers G+36</p>
+                <div class="bg-[#CFCFCF] w-[2px] h-[90%] absolute hidden md:block right-0"></div>
+            </div>
+            <div class="flex flex-col items-center p-1.5 relative h-[180px] gap-4 mt-8 group fade-in" style="transition-delay:300ms">
+                <figure class="group-hover:scale-125 transition-all duration-300 ease-in-out">
+                    <img src="./images/icon/4.svg" alt="Club House">
+                </figure>
+                <h3 class="font-jost font-medium text-[50px] text-white" data-count="100000">1,00,000</h3>
+                <p class="font-jost font-medium text-[24px] text-white">Sq ft Club House</p>
+                <div class="bg-[#CFCFCF] w-[2px] h-[90%] absolute hidden md:block right-0"></div>
+            </div>
+            <div class="flex flex-col items-center p-1.5 relative h-[180px] gap-4 mt-8 group fade-in" style="transition-delay:400ms">
+                <figure class="group-hover:scale-125 transition-all duration-300 ease-in-out">
+                    <img src="./images/icon/5.svg" alt="Parking">
+                </figure>
+                <h3 class="font-jost font-medium text-[50px] text-white" data-count="1400" data-suffix="+">1400+</h3>
+                <p class="font-jost font-medium text-[24px] text-white">Car Parking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PRODUCTS SECTION
+    ═══════════════════════════════════════ -->
+    <section id="products" class="sec-pad" style="background:#f8f9fa;">
+        <h2 class="sec-title">Our Residential Units</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">Choose from our thoughtfully designed luxury residences — each crafted for modern comfort and timeless elegance.</p>
+
+        <div class="products-grid">
+            <!-- 3 BHK -->
+            <div class="p-card fade-in">
+                <div class="p-img-placeholder" style="background:linear-gradient(135deg,#003253,#0a5a8c);">
+                    <i class="fa-solid fa-building" style="font-size:64px;color:rgba(255,255,255,0.25);"></i>
+                </div>
+                <div class="p-body">
+                    <span class="p-badge">3 BHK</span>
+                    <h3 class="p-title">3 Bedroom Apartment</h3>
+                    <p class="p-price">₹3 Cr – ₹4.5 Cr</p>
+                    <ul class="p-list">
+                        <li><i class="fa-solid fa-check"></i> 1,850 – 2,200 sq ft</li>
+                        <li><i class="fa-solid fa-check"></i> 3 Bedrooms + 3 Bathrooms</li>
+                        <li><i class="fa-solid fa-check"></i> Modular Kitchen</li>
+                        <li><i class="fa-solid fa-check"></i> Balcony with Panoramic View</li>
+                        <li><i class="fa-solid fa-check"></i> 2 Dedicated Parking</li>
+                    </ul>
+                    <button class="p-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire Now</button>
+                </div>
+            </div>
+            <!-- 4 BHK -->
+            <div class="p-card fade-in" style="transition-delay:100ms;">
+                <div class="p-img-placeholder" style="background:linear-gradient(135deg,#1a4a6e,#003253);">
+                    <i class="fa-solid fa-city" style="font-size:64px;color:rgba(255,255,255,0.25);"></i>
+                </div>
+                <div class="p-body">
+                    <span class="p-badge">4 BHK</span>
+                    <h3 class="p-title">4 Bedroom Apartment</h3>
+                    <p class="p-price">₹5 Cr – ₹7 Cr</p>
+                    <ul class="p-list">
+                        <li><i class="fa-solid fa-check"></i> 2,800 – 3,400 sq ft</li>
+                        <li><i class="fa-solid fa-check"></i> 4 Bedrooms + 4 Bathrooms</li>
+                        <li><i class="fa-solid fa-check"></i> Private Lobby Entry</li>
+                        <li><i class="fa-solid fa-check"></i> Double-height Living Room</li>
+                        <li><i class="fa-solid fa-check"></i> 3 Dedicated Parking</li>
+                    </ul>
+                    <button class="p-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire Now</button>
+                </div>
+            </div>
+            <!-- PENTHOUSE -->
+            <div class="p-card fade-in" style="transition-delay:200ms;">
+                <div class="p-img-placeholder" style="background:linear-gradient(135deg,#c9963a,#9d6e1c);">
+                    <i class="fa-solid fa-star" style="font-size:64px;color:rgba(255,255,255,0.3);"></i>
+                </div>
+                <div class="p-body">
+                    <span class="p-badge" style="background:#c9963a;">Penthouse</span>
+                    <h3 class="p-title">Sky Penthouse</h3>
+                    <p class="p-price">₹12 Cr – ₹20 Cr</p>
+                    <ul class="p-list">
+                        <li><i class="fa-solid fa-check"></i> 5,000 – 8,000 sq ft</li>
+                        <li><i class="fa-solid fa-check"></i> 5 Bedrooms + Private Terrace</li>
+                        <li><i class="fa-solid fa-check"></i> Private Pool Option</li>
+                        <li><i class="fa-solid fa-check"></i> 360° Panoramic Views</li>
+                        <li><i class="fa-solid fa-check"></i> 4+ Dedicated Parking</li>
+                    </ul>
+                    <button class="p-btn" style="background:#c9963a;border-color:#c9963a;" onmouseenter="this.style.background='transparent';this.style.color='#c9963a';" onmouseleave="this.style.background='#c9963a';this.style.color='#fff';" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FLOOR PLANS SECTION
+    ═══════════════════════════════════════ -->
+    <section id="plans" class="sec-pad" style="background:#fff;">
+        <h2 class="sec-title">Floor Plans</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">Explore our intelligently designed floor plans crafted for maximum space utilization and natural light.</p>
+
+        <div class="tab-row">
+            <button class="tab-btn active" onclick="showPlan('p3bhk',this)">3 BHK</button>
+            <button class="tab-btn" onclick="showPlan('p4bhk',this)">4 BHK</button>
+            <button class="tab-btn" onclick="showPlan('ppent',this)">Penthouse</button>
+        </div>
+
+        <div id="p3bhk" class="plan-panel active">
+            <div class="plan-vis">
+                <i class="fa-regular fa-map"></i>
+                <span>3 BHK Floor Plan</span>
+            </div>
+            <div class="plan-specs">
+                <h3 style="font-family:'Jost',sans-serif;font-size:22px;font-weight:700;color:#003253;margin-bottom:20px;">3 BHK Premium</h3>
+                <div class="spec-row"><span class="spec-label">Super Area</span><span class="spec-val">1,850 – 2,200 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Carpet Area</span><span class="spec-val">1,320 – 1,580 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Bedrooms</span><span class="spec-val">3 + Study</span></div>
+                <div class="spec-row"><span class="spec-label">Bathrooms</span><span class="spec-val">3 (2 attached + 1 common)</span></div>
+                <div class="spec-row"><span class="spec-label">Living + Dining</span><span class="spec-val">Open plan, 400 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Balconies</span><span class="spec-val">2 (Living + Master)</span></div>
+                <div class="spec-row"><span class="spec-label">Kitchen</span><span class="spec-val">Modular, Utility Room</span></div>
+                <div class="spec-row"><span class="spec-label">Parking</span><span class="spec-val">2 Dedicated</span></div>
+                <button class="p-btn" style="margin-top:20px;" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Detailed Plan</button>
+            </div>
+        </div>
+
+        <div id="p4bhk" class="plan-panel">
+            <div class="plan-vis">
+                <i class="fa-regular fa-map"></i>
+                <span>4 BHK Floor Plan</span>
+            </div>
+            <div class="plan-specs">
+                <h3 style="font-family:'Jost',sans-serif;font-size:22px;font-weight:700;color:#003253;margin-bottom:20px;">4 BHK Luxury</h3>
+                <div class="spec-row"><span class="spec-label">Super Area</span><span class="spec-val">2,800 – 3,400 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Carpet Area</span><span class="spec-val">2,050 – 2,480 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Bedrooms</span><span class="spec-val">4 + Servant Room</span></div>
+                <div class="spec-row"><span class="spec-label">Bathrooms</span><span class="spec-val">4 + 1 Servant</span></div>
+                <div class="spec-row"><span class="spec-label">Living + Dining</span><span class="spec-val">Double-height, 600 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Balconies</span><span class="spec-val">3 (Living, Master, Family)</span></div>
+                <div class="spec-row"><span class="spec-label">Kitchen</span><span class="spec-val">Island + Dry Kitchen</span></div>
+                <div class="spec-row"><span class="spec-label">Parking</span><span class="spec-val">3 Dedicated</span></div>
+                <button class="p-btn" style="margin-top:20px;" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Detailed Plan</button>
+            </div>
+        </div>
+
+        <div id="ppent" class="plan-panel">
+            <div class="plan-vis" style="background:linear-gradient(135deg,#fff8ec,#fdeecb);border-color:#c9963a;">
+                <i class="fa-regular fa-map" style="color:#c9963a;"></i>
+                <span style="color:#c9963a;">Sky Penthouse Plan</span>
+            </div>
+            <div class="plan-specs">
+                <h3 style="font-family:'Jost',sans-serif;font-size:22px;font-weight:700;color:#003253;margin-bottom:20px;">Sky Penthouse</h3>
+                <div class="spec-row"><span class="spec-label">Super Area</span><span class="spec-val">5,000 – 8,000 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Carpet Area</span><span class="spec-val">3,600 – 5,800 sq ft</span></div>
+                <div class="spec-row"><span class="spec-label">Bedrooms</span><span class="spec-val">5 + Library + Cinema</span></div>
+                <div class="spec-row"><span class="spec-label">Bathrooms</span><span class="spec-val">5 + 2 Guest</span></div>
+                <div class="spec-row"><span class="spec-label">Private Terrace</span><span class="spec-val">1,200 sq ft sky terrace</span></div>
+                <div class="spec-row"><span class="spec-label">Private Pool</span><span class="spec-val">Available (optional)</span></div>
+                <div class="spec-row"><span class="spec-label">Kitchen</span><span class="spec-val">Professional + Pantry</span></div>
+                <div class="spec-row"><span class="spec-label">Parking</span><span class="spec-val">4+ Dedicated</span></div>
+                <button class="p-btn" style="margin-top:20px;background:#c9963a;border-color:#c9963a;" onmouseenter="this.style.background='transparent';this.style.color='#c9963a';" onmouseleave="this.style.background='#c9963a';this.style.color='#fff';" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Detailed Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         LOCATION SECTION
+    ═══════════════════════════════════════ -->
+    <section id="location" class="sec-pad" style="background:#f8f9fa;">
+        <h2 class="sec-title">Prime Location</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">Strategically located in IT City, Sector 66A, Mohali — at the heart of Punjab's most rapidly growing urban corridor.</p>
+
+        <div class="loc-inner">
+            <div class="map-wrap fade-in">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3428.9!2d76.7025!3d30.7267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fee906da6f81f%3A0x800990dd5da3bd11!2sSector%2066A%2C%20Sahibzada%20Ajit%20Singh%20Nagar%2C%20Punjab!5e0!3m2!1sen!2sin!4v1"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="fade-in" style="transition-delay:150ms;">
+                <div class="loc-item">
+                    <div class="loc-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="loc-text">
+                        <h4>Project Address</h4>
+                        <p>The Pinnacle, Sector 66A, IT City<br>Sahibzada Ajit Singh Nagar (Mohali), Punjab 160066</p>
+                    </div>
+                </div>
+                <div class="loc-item">
+                    <div class="loc-icon"><i class="fa-solid fa-road"></i></div>
+                    <div class="loc-text">
+                        <h4>Connectivity</h4>
+                        <p>3 km from Chandigarh Airport &amp; 5 min from NH-5 (Delhi–Chandigarh Highway)</p>
+                    </div>
+                </div>
+                <div class="loc-item">
+                    <div class="loc-icon"><i class="fa-solid fa-train"></i></div>
+                    <div class="loc-text">
+                        <h4>Public Transport</h4>
+                        <p>Close to proposed Metro Station &amp; Chandigarh Railway Station (12 km)</p>
+                    </div>
+                </div>
+                <div class="near-list">
+                    <p style="font-family:'Jost',sans-serif;font-size:14px;font-weight:700;color:#003253;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Nearby Landmarks</p>
+                    <div class="near-item"><i class="fa-solid fa-plane"></i><span>Chandigarh International Airport – 5 mins</span></div>
+                    <div class="near-item"><i class="fa-solid fa-hospital"></i><span>Fortis Hospital, Mohali – 8 mins</span></div>
+                    <div class="near-item"><i class="fa-solid fa-graduation-cap"></i><span>Chandigarh University – 10 mins</span></div>
+                    <div class="near-item"><i class="fa-solid fa-building"></i><span>IT Park, Mohali – 5 mins</span></div>
+                    <div class="near-item"><i class="fa-solid fa-cricket-bat-ball"></i><span>IS Bindra PCA Stadium – 7 mins</span></div>
+                    <div class="near-item"><i class="fa-solid fa-cart-shopping"></i><span>Elante Mall, Chandigarh – 12 mins</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PRICE SECTION
+    ═══════════════════════════════════════ -->
+    <section id="price" class="sec-pad" style="background:#fff;">
+        <h2 class="sec-title">Pricing</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">Transparent pricing crafted to match your aspirations — choose the home that fits your lifestyle perfectly.</p>
+
+        <div class="price-grid">
+            <div class="pr-card fade-in">
+                <p class="pr-type">3 BHK</p>
+                <p class="pr-val">₹3–4.5 Cr</p>
+                <p class="pr-size">1,850 – 2,200 sq ft</p>
+                <ul class="pr-list">
+                    <li><i class="fa-solid fa-check"></i> 3 Bedrooms + Study Room</li>
+                    <li><i class="fa-solid fa-check"></i> Modular Kitchen Included</li>
+                    <li><i class="fa-solid fa-check"></i> 2 Car Parking</li>
+                    <li><i class="fa-solid fa-check"></i> Club Membership (1 Year)</li>
+                    <li><i class="fa-solid fa-check"></i> Bank Loan Assistance</li>
+                </ul>
+                <button class="pr-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button>
+            </div>
+            <div class="pr-card featured fade-in" style="transition-delay:100ms;">
+                <div class="feat-tag">POPULAR</div>
+                <p class="pr-type pr-featured-type">4 BHK</p>
+                <p class="pr-val">₹5–7 Cr</p>
+                <p class="pr-size">2,800 – 3,400 sq ft</p>
+                <ul class="pr-list">
+                    <li><i class="fa-solid fa-check"></i> 4 Bedrooms + Servant Room</li>
+                    <li><i class="fa-solid fa-check"></i> Island Kitchen + Pantry</li>
+                    <li><i class="fa-solid fa-check"></i> 3 Car Parking</li>
+                    <li><i class="fa-solid fa-check"></i> Lifetime Club Membership</li>
+                    <li><i class="fa-solid fa-check"></i> Priority Bank Assistance</li>
+                </ul>
+                <button class="pr-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button>
+            </div>
+            <div class="pr-card fade-in" style="transition-delay:200ms;">
+                <p class="pr-type" style="color:#c9963a;">Penthouse</p>
+                <p class="pr-val">₹12–20 Cr</p>
+                <p class="pr-size">5,000 – 8,000 sq ft</p>
+                <ul class="pr-list">
+                    <li><i class="fa-solid fa-check"></i> 5 Bedrooms + Terrace</li>
+                    <li><i class="fa-solid fa-check"></i> Private Pool Option</li>
+                    <li><i class="fa-solid fa-check"></i> 4+ Car Parking</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Club Membership</li>
+                    <li><i class="fa-solid fa-check"></i> White Glove Service</li>
+                </ul>
+                <button class="pr-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button>
+            </div>
+        </div>
+
+        <p style="text-align:center;font-family:'Jost',sans-serif;font-size:13px;color:#999;margin-top:32px;">
+            * Prices are indicative and subject to change. GST, registration, and other charges extra. Contact sales team for best offer.
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         AMENITIES SECTION
+    ═══════════════════════════════════════ -->
+    <section id="amenities" class="sec-pad" style="background:#003253;">
+        <h2 class="sec-title white">World-Class Amenities</h2>
+        <div class="sec-line gold"></div>
+        <p class="sec-sub white">Every amenity designed to enrich your daily life — from wellness to recreation, community to convenience.</p>
+
+        <div class="amen-grid">
+            <div class="amen-card fade-in"><i class="fa-solid fa-water-ladder"></i><p>Swimming Pool</p></div>
+            <div class="amen-card fade-in" style="transition-delay:50ms;"><i class="fa-solid fa-dumbbell"></i><p>Gymnasium</p></div>
+            <div class="amen-card fade-in" style="transition-delay:100ms;"><i class="fa-solid fa-spa"></i><p>Spa &amp; Wellness</p></div>
+            <div class="amen-card fade-in" style="transition-delay:150ms;"><i class="fa-solid fa-tennis-ball"></i><p>Sports Courts</p></div>
+            <div class="amen-card fade-in" style="transition-delay:200ms;"><i class="fa-solid fa-children"></i><p>Kids Play Area</p></div>
+            <div class="amen-card fade-in" style="transition-delay:250ms;"><i class="fa-solid fa-person-running"></i><p>Jogging Track</p></div>
+            <div class="amen-card fade-in" style="transition-delay:300ms;"><i class="fa-solid fa-chess-board"></i><p>Club House</p></div>
+            <div class="amen-card fade-in" style="transition-delay:350ms;"><i class="fa-solid fa-film"></i><p>Mini Theatre</p></div>
+            <div class="amen-card fade-in" style="transition-delay:400ms;"><i class="fa-solid fa-shield-halved"></i><p>24/7 Security</p></div>
+            <div class="amen-card fade-in" style="transition-delay:450ms;"><i class="fa-solid fa-video"></i><p>CCTV Surveillance</p></div>
+            <div class="amen-card fade-in" style="transition-delay:500ms;"><i class="fa-solid fa-car"></i><p>Ample Parking</p></div>
+            <div class="amen-card fade-in" style="transition-delay:550ms;"><i class="fa-solid fa-elevator"></i><p>High-Speed Lifts</p></div>
+            <div class="amen-card fade-in" style="transition-delay:600ms;"><i class="fa-solid fa-bolt"></i><p>Power Backup</p></div>
+            <div class="amen-card fade-in" style="transition-delay:650ms;"><i class="fa-solid fa-droplet"></i><p>Water Treatment</p></div>
+            <div class="amen-card fade-in" style="transition-delay:700ms;"><i class="fa-solid fa-wifi"></i><p>High-Speed Wi-Fi</p></div>
+            <div class="amen-card fade-in" style="transition-delay:750ms;"><i class="fa-solid fa-leaf"></i><p>Green Landscaping</p></div>
+            <div class="amen-card fade-in" style="transition-delay:800ms;"><i class="fa-solid fa-utensils"></i><p>Rooftop Lounge</p></div>
+            <div class="amen-card fade-in" style="transition-delay:850ms;"><i class="fa-solid fa-fire-burner"></i><p>BBQ Area</p></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         SPECIFICATION SECTION
+    ═══════════════════════════════════════ -->
+    <section id="specification" class="sec-pad" style="background:#f8f9fa;">
+        <h2 class="sec-title">Specifications</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">Premium materials and finishes — every detail engineered for durability, beauty, and comfort.</p>
+
+        <div class="stab-row">
+            <button class="stab-btn active" onclick="showSpec('sstr',this)">Structure</button>
+            <button class="stab-btn" onclick="showSpec('sflo',this)">Flooring</button>
+            <button class="stab-btn" onclick="showSpec('skitch',this)">Kitchen</button>
+            <button class="stab-btn" onclick="showSpec('sbath',this)">Bathrooms</button>
+            <button class="stab-btn" onclick="showSpec('selec',this)">Electrical</button>
+        </div>
+
+        <div id="sstr" class="stab-panel active">
+            <table class="spec-table">
+                <tr><td>Structure</td><td>RCC framed structure with shear walls – earthquake resistant (Zone IV)</td></tr>
+                <tr><td>External Walls</td><td>Autoclaved Aerated Concrete (AAC) blocks with two-coat plaster</td></tr>
+                <tr><td>Internal Walls</td><td>AAC blocks with gypsum finish for smooth surface</td></tr>
+                <tr><td>Waterproofing</td><td>Crystalline waterproofing in basement &amp; terrace; IWC in wet areas</td></tr>
+                <tr><td>Façade</td><td>High-performance structural glazing &amp; aluminium composite panels</td></tr>
+                <tr><td>Doors</td><td>8-foot solid core flush doors with premium hardware</td></tr>
+                <tr><td>Windows</td><td>UPVC double-glazed windows with mosquito mesh</td></tr>
+            </table>
+        </div>
+
+        <div id="sflo" class="stab-panel">
+            <table class="spec-table">
+                <tr><td>Living &amp; Dining</td><td>Italian marble / 800×800 mm vitrified tiles (anti-skid)</td></tr>
+                <tr><td>Master Bedroom</td><td>Engineered hardwood flooring / premium vitrified tiles</td></tr>
+                <tr><td>Other Bedrooms</td><td>600×600 mm vitrified tiles in designer pattern</td></tr>
+                <tr><td>Balconies</td><td>Anti-skid ceramic tiles with weather-resistant finish</td></tr>
+                <tr><td>Kitchen</td><td>Anti-skid ceramic tiles with dado up to 2 ft</td></tr>
+                <tr><td>Bathrooms</td><td>Non-slip ceramic tiles floor &amp; wall dado up to full height</td></tr>
+                <tr><td>Corridors &amp; Lobby</td><td>Premium marble / granite with designer pattern</td></tr>
+            </table>
+        </div>
+
+        <div id="skitch" class="stab-panel">
+            <table class="spec-table">
+                <tr><td>Kitchen Platform</td><td>Granite / engineered stone counter top with SS sink</td></tr>
+                <tr><td>Cabinets</td><td>Modular kitchen with laminated shutters (soft close)</td></tr>
+                <tr><td>Chimney &amp; Hob</td><td>Provision for chimney &amp; hob with gas pipeline</td></tr>
+                <tr><td>Appliance Space</td><td>Built-in provisions for refrigerator, microwave &amp; dishwasher</td></tr>
+                <tr><td>Water Supply</td><td>Hot &amp; cold water supply with ISI marked CP fittings</td></tr>
+                <tr><td>Utility Area</td><td>Separate utility room with washing machine provision</td></tr>
+            </table>
+        </div>
+
+        <div id="sbath" class="stab-panel">
+            <table class="spec-table">
+                <tr><td>Sanitary Ware</td><td>Kohler / Jaquar brand wall-hung EWCs</td></tr>
+                <tr><td>Fittings</td><td>Single-lever hot &amp; cold CP fittings (Kohler / Grohe)</td></tr>
+                <tr><td>Master Bathroom</td><td>Rain shower + hand shower with glass partition</td></tr>
+                <tr><td>Vanity</td><td>Designer vanity with under-counter basin &amp; mirror cabinet</td></tr>
+                <tr><td>Accessories</td><td>Towel rail, soap dish, toilet paper holder (branded)</td></tr>
+                <tr><td>Exhaust</td><td>Exhaust fan provision in all bathrooms</td></tr>
+            </table>
+        </div>
+
+        <div id="selec" class="stab-panel">
+            <table class="spec-table">
+                <tr><td>Wiring</td><td>Concealed copper wiring with FRLS cable (Havells / Polycab)</td></tr>
+                <tr><td>Switches</td><td>Modular switches (Schneider / Legrand)</td></tr>
+                <tr><td>Power Points</td><td>Sufficient power points in all rooms including AC, TV &amp; charging</td></tr>
+                <tr><td>Air Conditioning</td><td>Split AC provision in all bedrooms &amp; living room</td></tr>
+                <tr><td>Home Automation</td><td>Smart home automation panel (optional upgrade)</td></tr>
+                <tr><td>Power Backup</td><td>100% DG power backup for common areas; partial for apartments</td></tr>
+                <tr><td>EV Charging</td><td>EV charging provision in car parking (select units)</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         GALLERY SECTION
+    ═══════════════════════════════════════ -->
+    <section id="gallery" class="sec-pad" style="background:#fff;">
+        <h2 class="sec-title">Gallery</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">A visual journey through The Pinnacle — luxury living captured in every frame.</p>
+
+        <div class="gallery-grid">
+            <div class="g-item fade-in" onclick="openLightbox('images/heroimg.png')">
+                <img src="images/heroimg.png" alt="The Pinnacle Tower">
+                <div class="g-ov"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:80ms;" onclick="openLightbox('images/section2.png')">
+                <img src="images/section2.png" alt="Building View">
+                <div class="g-ov"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:160ms;" onclick="openLightbox('images/Rectangle.jpg')">
+                <img src="images/Rectangle.jpg" alt="Pinnacle Skyline">
+                <div class="g-ov"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <!-- Placeholder tiles -->
+            <div class="g-item fade-in" style="transition-delay:240ms;">
+                <div class="g-ph" style="background:linear-gradient(135deg,#003253,#0a5a8c);">
+                    <i class="fa-solid fa-water-ladder"></i><span>Swimming Pool</span>
+                </div>
+                <div class="g-ov"><i class="fa-solid fa-clock"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:320ms;">
+                <div class="g-ph" style="background:linear-gradient(135deg,#1a4a6e,#003253);">
+                    <i class="fa-solid fa-dumbbell"></i><span>Gymnasium</span>
+                </div>
+                <div class="g-ov"><i class="fa-solid fa-clock"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:400ms;">
+                <div class="g-ph" style="background:linear-gradient(135deg,#c9963a,#9d6e1c);">
+                    <i class="fa-solid fa-star"></i><span>Sky Lounge</span>
+                </div>
+                <div class="g-ov"><i class="fa-solid fa-clock"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:480ms;">
+                <div class="g-ph" style="background:linear-gradient(135deg,#2a6e4e,#0d4a32);">
+                    <i class="fa-solid fa-leaf"></i><span>Landscaped Gardens</span>
+                </div>
+                <div class="g-ov"><i class="fa-solid fa-clock"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:560ms;">
+                <div class="g-ph" style="background:linear-gradient(135deg,#4a2a6e,#2a0d4a);">
+                    <i class="fa-solid fa-film"></i><span>Mini Theatre</span>
+                </div>
+                <div class="g-ov"><i class="fa-solid fa-clock"></i></div>
+            </div>
+            <div class="g-item fade-in" style="transition-delay:640ms;">
+                <div class="g-ph" style="background:linear-gradient(135deg,#003253,#c9963a);">
+                    <i class="fa-solid fa-chess-board"></i><span>Club House</span>
+                </div>
+                <div class="g-ov"><i class="fa-solid fa-clock"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CONTACT SECTION
+    ═══════════════════════════════════════ -->
+    <section id="contact" class="sec-pad" style="background:#f8f9fa;">
+        <h2 class="sec-title">Get in Touch</h2>
+        <div class="sec-line"></div>
+        <p class="sec-sub">Take the first step toward your dream home. Our sales team is ready to assist you with all queries.</p>
+
+        <div class="contact-inner">
+            <div class="c-info fade-in">
+                <h3>Contact Information</h3>
+                <div class="c-info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h5>Address</h5>
+                        <p>The Pinnacle, Sector 66A, IT City<br>Mohali, Punjab – 160066</p>
+                    </div>
+                </div>
+                <div class="c-info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h5>Sales Helpline</h5>
+                        <p>+91 98765 43210<br>+91 98765 43211</p>
+                    </div>
+                </div>
+                <div class="c-info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h5>Email</h5>
+                        <p>sales@pinnaclemohali.com</p>
+                    </div>
+                </div>
+                <div class="c-info-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h5>Site Office Hours</h5>
+                        <p>Mon – Sat: 10:00 AM – 7:00 PM<br>Sunday: 11:00 AM – 5:00 PM</p>
+                    </div>
+                </div>
+                <div class="c-social">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="c-form fade-in" style="transition-delay:150ms;">
+                <h3>Request a Callback</h3>
+                <form id="contactForm" onsubmit="submitForm(event)">
+                    <div class="form-2col">
+                        <div class="fg">
+                            <label>First Name *</label>
+                            <input type="text" placeholder="Rahul" required>
+                        </div>
+                        <div class="fg">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Sharma">
+                        </div>
+                    </div>
+                    <div class="form-2col">
+                        <div class="fg">
+                            <label>Phone Number *</label>
+                            <input type="tel" placeholder="+91 98765 43210" required>
+                        </div>
+                        <div class="fg">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="you@email.com">
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Interested In</label>
+                        <select>
+                            <option value="">Select Unit Type</option>
+                            <option>3 BHK Apartment (₹3–4.5 Cr)</option>
+                            <option>4 BHK Apartment (₹5–7 Cr)</option>
+                            <option>Sky Penthouse (₹12–20 Cr)</option>
+                            <option>Site Visit / Schedule Tour</option>
+                            <option>Download Brochure</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Message</label>
+                        <textarea placeholder="Tell us more about your requirements or preferred time for a site visit…"></textarea>
+                    </div>
+                    <button type="submit" class="f-submit">Send Enquiry</button>
+                    <div class="success-msg" id="successMsg">
+                        <i class="fa-solid fa-circle-check" style="margin-right:8px;"></i>
+                        Thank you! Our team will call you shortly.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="f-brand">
+                <img src="images/logo.png" alt="The Pinnacle" style="filter:brightness(10);">
+                <p style="margin-top:14px;">An iconic 36-floor luxury landmark by STJ Group in the heart of IT City, Mohali. RERA Approved.</p>
+                <div class="f-social" style="margin-top:16px;">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="f-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#plans">Floor Plans</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="f-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#price">Pricing</a></li>
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#specification">Specifications</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#contact">Site Visit</a></li>
+                    <li><a href="#contact">Download Brochure</a></li>
+                </ul>
+            </div>
+            <div class="f-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+                    <li><a href="mailto:sales@pinnaclemohali.com">sales@pinnaclemohali.com</a></li>
+                    <li><a href="#location">Sector 66A, IT City</a></li>
+                    <li><a href="#location">Mohali, Punjab 160066</a></li>
+                </ul>
+                <p style="font-family:'Jost',sans-serif;font-size:12px;color:#557a94;margin-top:14px;">RERA: PBRERA-SAS81-PR1166</p>
+            </div>
+        </div>
+        <div class="f-bottom">
+            <p>© 2025 The Pinnacle by STJ Group. All rights reserved.</p>
+            <p>RERA No: PBRERA-SAS81-PR1166 | Mohali, Punjab</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lb-close" onclick="document.getElementById('lightbox').classList.remove('open')">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="lightboxImg" src="" alt="Gallery Image">
+    </div>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/919876543210?text=Hi%2C%20I%27m%20interested%20in%20The%20Pinnacle%20Mohali" class="wa-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- SCROLL TO TOP -->
+    <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
